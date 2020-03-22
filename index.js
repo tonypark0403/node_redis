@@ -10,7 +10,14 @@ require('./models/Blog');
 require('./services/passport');
 
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI, { useMongoClient: true });
+mongoose.connect(keys.mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+})
+  .then(() => console.log("MongoDB connected..."))
+  .catch(err => console.log(err));
 
 const app = express();
 
